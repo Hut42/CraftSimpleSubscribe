@@ -1,0 +1,14 @@
+{% extends "_layouts/cp" %}
+
+{% set title = "Simple Subscribe"|t %}
+
+{% set tabs = {
+    splash: { label: "Splash page"|t, url: url('simplesubscribe') },
+    recent: { label: "Submissions"|t, url: url('simplesubscribe/submissions') }
+} %}
+
+{% set selectedTab = 'splash' %}
+
+{% set content %}
+    <p>Thank you for choosing to use the simple submission</p>
+{% endset %}

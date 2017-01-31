@@ -1,0 +1,49 @@
+{% extends "_layouts/cp" %}
+
+
+{% includeJsFile "//cdn.datatables.net/1.10.13/js/jquery.dataTables.js" %}
+{% includeCssFile "//cdn.datatables.net/1.10.13/css/jquery.dataTables.css" %}
+
+{% set title = "Simple Subscribe - Submissions"|t %}
+
+{% set tabs = {
+    splash: { label: "Splash page"|t, url: url('simplesubscribe') },
+    recent: { label: "Submissions"|t, url: url('simplesubscribe/submissions') }
+} %}
+
+{% set selectedTab = 'recent' %}
+
+{% set content %}
+
+<table id="subscribers" class="display" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>Email Address</th>
+            <th>Added date</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>Email Address</th>
+            <th>Added date</th>
+        </tr>
+    </tfoot>
+    <tbody>
+{% for block in craft.SimpleSubscribe.findSubmissions().findAll() %}
+        <tr>
+            <td>{{ block.email }}</td>
+            <td>{{ block.dateCreated }}</td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+
+{% endset %}
+
+{% set datatables %}
+jQuery(document).ready(function() {
+    $('#subscribers').DataTable();
+} );
+{% endset %}
+
+{% includeJs datatables %}
